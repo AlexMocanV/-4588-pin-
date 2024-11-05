@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+std::ifstream fin("pin.in");
+std::ofstream fout("pin.out");
+
+std::string pin;
+int main()
+{
+    std::string nou;
+    getline(fin,nou);
+    int n=stoi(nou);
+    while(n--)
+    {
+        std::string numere;
+        getline(fin,numere);
+        int cand=-1,cnt=1,cifre=0;
+        for(int i=0;i<numere.length();i++)
+        {
+            if((numere[i]-'0')>=0&&(numere[i]-'0')<=9)
+            {
+                cifre++;
+                if((numere[i]-'0')==cand)
+                {
+                    cnt++;
+                }
+                else cnt--;
+                if(cnt==0)
+                {
+                    cand=numere[i]-'0';
+                    cnt++;
+                }
+            }
+        }
+        cnt=0;
+        for(int i=0;i<numere.length();i++)
+        {
+            if(numere[i]-'0'>=0&&numere[i]-'0'<=9&&cand==numere[i]-'0')
+            {
+                cnt++;  
+            }
+        }
+        if(cnt>cifre/2)
+        {
+            //fout<<cand;
+            pin+=char(cand+'0');
+        }
+    }
+    if(pin.size()!=4)
+    {
+        fout<<"PIN INCORECT ";
+    }
+    else
+    {
+        fout<<"PIN CORECT ";
+    }
+    fout<<pin;
+    return 0;
+}
